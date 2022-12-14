@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>page1</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <style>
+    .watermark {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      pointer-events: none;
+      background-image: url("watermark.svg");
+      background-repeat: repeat;
+      /*透明*/
+    }
+  </style>
+</head>
+
+<body>
+  <div class="image">
+    <img src="pictures\pexels-alex-lázaro-21784.jpg" alt="" width="100%" height="100%" />
+    <div class="watermark" author="朱甲豪201250134"></div>
+  </div>
+</body>
+<script>
+
+
+  let svg = document.querySelector(".watermark");
+  let svgText = svg.getAttribute("author");
+  let fontSize = 18;
+  let svgWidth = fontSize * svgText.length;
+  let svgHeight = svgWidth;
+  let rotate = -45;
+  watermarksvg = "%3Csvg xmlns='http://www.w3.org/2000/svg' width='${svgWidth}px' height='${svgHeight}px'%3E  %3Ctext  x='${fontSize}' y='0'  fill-opacity='0.1' fill='%23000' transform='translate(0,${svgHeight})rotate(${rotate})'    font-size='${fontSize}'%3E${svgText}%3C/text%3E%3C/svg%3E";
+  var encodedData = `data:image/svg+xml;base64,${window.btoa(watermarksvg)}`;
+  
+  document.querySelector(".watermark").style.setProperty("background-image", encodedData);
+  
+
+</script>
+
+</html>
